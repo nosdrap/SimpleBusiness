@@ -14,6 +14,7 @@ table {
 <?php
     //Test
 	$name = $email = $nameErr = $emailErr = $phone = $phoneErr = $position = $positionErr = $web = $webErr = $facebook = $facebookErr = "";
+        $image= "";
 	$canvasHeight = 591;
 	$canvasWidth = $canvasHeight * 1.8;
 	$basicWidth=$canvasWidth*(15/250);
@@ -74,6 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $facebookErr = "Only numbers and white space allowed";
     }*/
   }
+  if (!empty($_POST["image"])) {
+    $image = test_input($_POST["image"]);
+  }
   if (!empty($_POST["resetName"])) {
     unset($_POST['nameWidth']);
 		unset($_POST['nameHeight']);
@@ -120,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$_POST["contactWidth"] = $contactWidth;
 	}
 }
+//echo $image;
 
 function test_input($data) {
   $data = trim($data);
@@ -135,10 +140,10 @@ window.onload = function() {
 	var webimg=document.getElementById("websrc");
 	var fbimg=document.getElementById("fbsrc");
         var canvas=document.getElementById("myCanvas");
-        var OPZ=document.getElementById("opz");
-        var MZ=document.getElementById("mz");
-        var FN=document.getElementById("fn");
-        var Prah=document.getElementById("prah");
+        var OPZ=document.getElementById("opzsrc");
+        var MZ=document.getElementById("mzsrc");
+        var FN=document.getElementById("fnsrc");
+        var Prah=document.getElementById("prahsrc");
 	var name = "<?php echo $name; ?>";
 	var position = "<?php echo $position; ?>";
 	var phone = "<?php echo $phone; ?>";
@@ -155,9 +160,12 @@ window.onload = function() {
 	var fontName= <?php echo $fontName; ?>;
 	var fontPosition= <?php echo $fontPosition; ?>;
 	var fontContact= <?php echo $fontContact; ?>;
+        var image = <?php echo $image; ?>;
 	var height=0;
 	if (canvas.getContext)
 	{
+		//canvas.style.height = "250px";
+		//canvas.style.width = "450px";
 		var cxt=canvas.getContext("2d");
 		cxt.fillStyle="#FFFFFF";
 		cxt.fillRect(0,0,canvas.width,canvas.height);
@@ -211,6 +219,38 @@ window.onload = function() {
 		fillFacebook.fillText(facebook, contactWidth, contactHeight+height);
 		height=height + (canvasHeight/12.5)
 		}
+                if (image!=""){
+                    switch(image) {
+                        case 1:
+                            var drawBottomImage= canvas.getContext("2d");
+                            var opzheight=canvasHeight*(30/250);
+                            var opzwidth=opzheight*(1703/353);
+                            drawBottomImage.drawImage(OPZ,canvasHeight*(10/250), canvasHeight-canvasHeight*(35/250),opzwidth,opzheight);
+                            var drawBottomMZ=canvas.getContext("2d");
+                            var mzwidth=opzheight*(1913/396);
+                            drawBottomMZ.drawImage(MZ,canvasHeight*(10/250)+opzwidth, canvasHeight-canvasHeight*(35/250),mzwidth,opzheight); 
+                            var drawBottomFN=canvas.getContext("2d");
+                            var fnwidth=opzheight*(757/268);
+                            drawBottomFN.drawImage(FN,canvasHeight*(10/250)+opzwidth+mzwidth, canvasHeight-canvasHeight*(35/250),fnwidth,opzheight);    
+                            var drawBottomPrah=canvas.getContext("2d");
+                            var prahwidth=opzheight*(1200/599);
+                            drawBottomPrah.drawImage(Prah,canvasHeight*(10/250)+opzwidth+mzwidth+fnwidth, canvasHeight-canvasHeight*(35/250),prahwidth,opzheight);                        
+                        break;
+                        case 2:
+                            // code block
+                            break;
+                        case 3:
+                            // code block
+                            break;
+                        case 4:
+                            // code block
+                            break;
+                        default:
+                             // code block
+                    };
+                };
+		canvas.style.height = "250px";
+		canvas.style.width = "450px";
 		var button = document.getElementById('btn-download');
 		button.addEventListener('click', function (e) {
 			var dataURL = canvas.toDataURL('image/png');
@@ -218,8 +258,8 @@ window.onload = function() {
 		});
 		
 		
-		canvas.style.height = "250px";
-		canvas.style.width = "450px";
+		//canvas.style.height = "250px";
+		//canvas.style.width = "450px";
 	}
 }
 </script>
@@ -230,8 +270,8 @@ window.onload = function() {
 	<img id="fbsrc" src="fb.png" style="display:none;" >
 	<img id="fnsrc" src="fn.jpg" style="display:none;" >
 	<img id="opzsrc" src="opz.jpg" style="display:none;" >
-	<img id="prahsrc" src="prah.jpg" style="display:none;" >
-	<img id="mzsrc" src="mz.png" style="display:none;" >
+	<img id="prahsrc" src="prah.png" style="display:none;" >
+	<img id="mzsrc" src="mz.jpg" style="display:none;" >
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<caption>Business Card</caption>
 		<tr>
@@ -295,6 +335,17 @@ window.onload = function() {
 				<input type="text" id="facebook" name="facebook" value="<?php echo $facebook;?>">
 				<span class="error"> <?php echo $facebookErr;?></span>
 			</td>
+                </tr>
+                <tr>
+                    <td><label for="image">Choose image:</label></td>
+                    <td>
+                        <select id="image" name="image">
+                            <option value="1" <?php if ($image==1){echo "selected";};?>>Version 1</option>
+                            <option value="2" <?php if ($image==2){echo "selected";};?>>Version 2</option>
+                            <option value="3" <?php if ($image==3){echo "selected";};?>>Version 3</option>
+                            <option value="4" <?php if ($image==4){echo "selected";};?>>Version 4</option>
+                        </select>
+                    </td>
                 </tr>
 		<tr>
 			<td colspan="2" style="text-align:center"><input type="submit" value="Apply">
