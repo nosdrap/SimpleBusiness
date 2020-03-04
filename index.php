@@ -12,6 +12,7 @@ table {
 
 <body>
 <?php
+    //Test
 	$name = $email = $nameErr = $emailErr = $phone = $phoneErr = $position = $positionErr = $web = $webErr = $facebook = $facebookErr = "";
 	$canvasHeight = 591;
 	$canvasWidth = $canvasHeight * 1.8;
