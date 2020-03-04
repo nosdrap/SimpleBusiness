@@ -227,10 +227,6 @@ window.onload = function() {
 	<img id="emailsrc" src="email.png" style="display:none;" >
 	<img id="websrc" src="web.png" style="display:none;" >
 	<img id="fbsrc" src="fb.png" style="display:none;" >
-	<img id="fnsrc" src="fn.jpg" style="display:none;" >
-	<img id="opzsrc" src="opz.jpg" style="display:none;" >
-	<img id="prahsrc" src="prah.jpg" style="display:none;" >
-	<img id="mzsrc" src="mz.png" style="display:none;" >
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<caption>Business Card</caption>
 		<tr>
