@@ -14,7 +14,7 @@ table {
 <?php
     //Test
 	$name = $email = $nameErr = $emailErr = $phone = $phoneErr = $position = $positionErr = $web = $webErr = $facebook = $facebookErr = "";
-        $image= "";
+        $image= "0";
 	$canvasHeight = 591;
 	$canvasWidth = $canvasHeight * 1.8;
 	$basicWidth=$canvasWidth*(15/250);
@@ -164,8 +164,8 @@ window.onload = function() {
 	var height=0;
 	if (canvas.getContext)
 	{
-		//canvas.style.height = "250px";
-		//canvas.style.width = "450px";
+		canvas.style.height = "250px";
+		canvas.style.width = "450px";
 		var cxt=canvas.getContext("2d");
 		cxt.fillStyle="#FFFFFF";
 		cxt.fillRect(0,0,canvas.width,canvas.height);
