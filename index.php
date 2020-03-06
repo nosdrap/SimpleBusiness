@@ -15,6 +15,9 @@ table {
     //Test
 	$name = $email = $nameErr = $emailErr = $phone = $phoneErr = $position = $positionErr = $web = $webErr = $facebook = $facebookErr = "";
         $image= "0";
+        $fontNameSize=20;
+        $fontPositionSize=20;
+        $fontContactSize=17;
 	$canvasHeight = 591;
 	$canvasWidth = $canvasHeight * 1.8;
 	$basicWidth=$canvasWidth*(15/250);
@@ -24,9 +27,9 @@ table {
 	$positionWidth = $basicWidth;
 	$contactHeight = $canvasHeight*(130/250);
 	$contactWidth = $basicWidth + $canvasWidth*(10/250);
-	$fontName=$canvasHeight*(30/250);
-	$fontPosition=$canvasHeight*(20/250);
-	$fontContact=$canvasHeight*(17/250);
+	//$fontName=$canvasHeight*(30/250);
+	//$fontPosition=$canvasHeight*(20/250);
+	//$fontContact=$canvasHeight*(17/250);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -82,16 +85,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     unset($_POST['nameWidth']);
 		unset($_POST['nameHeight']);
 		unset($_POST['resetName']);
+                unset($_POST['fontNameSize']);
 	}
   if (!empty($_POST["resetPosition"])) {
     unset($_POST['positionWidth']);
 		unset($_POST['positionHeight']);
 		unset($_POST['resetPosition']);
+                unset($_POST['fontPositionSize']);
 	}
   if (!empty($_POST["resetContact"])) {
     unset($_POST['contactWidth']);
 		unset($_POST['contactHeight']);
 		unset($_POST['resetContact']);
+                unset($_POST['fontContactSize']);
 	}
   if (!empty($_POST["nameHeight"])) {
     $nameHeight = test_input($_POST["nameHeight"]);
@@ -123,8 +129,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }else{
 		$_POST["contactWidth"] = $contactWidth;
 	}
+  if (!empty($_POST["fontNameSize"])) {
+    $fontNameSize = test_input($_POST["fontNameSize"]);
+    if (!preg_match("/^[1-9]*$/",$fontNameSize)) {
+      $fontNameSize=20;
+      $Post["fontNameSize"]= $fontNameSize;
+    };
+  }else{
+            $_POST["fontNameSize"] = $fontNameSize;
+	}
+  if (!empty($_POST["fontPositionSize"])) {
+    $fontPositionSize = test_input($_POST["fontPositionSize"]);
+    if (!preg_match("/^[1-9]*$/",$fontPositionSize)) {
+      $fontPositionSize=20;
+      $Post["fontPositionSize"]= $fontPositionSize;
+    };
+  }else{
+            $_POST["fontPositionSize"] = $fontPositionSize;
+	}
+  if (!empty($_POST["fontContactSize"])) {
+    $fontContactSize = test_input($_POST["fontContactSize"]);
+    if (!preg_match("/^[1-9]*$/",$fontContactSize)) {
+      $fontContactSize=17;
+      $Post["fontContactSize"]= $fontContactSize;
+    };
+  }else{
+            $_POST["fontContactSize"] = $fontContactSize;
+	}
 }
 //echo $image;
+    //$fontName=$canvasHeight*($fontNameSize/250);
+    //$fontPosition=$canvasHeight*(20/250);
+    //$fontContact=$canvasHeight*(17/250);
 
 function test_input($data) {
   $data = trim($data);
@@ -157,9 +193,9 @@ window.onload = function() {
 	var contactHeight = <?php echo $contactHeight; ?>;
 	var contactWidth = <?php echo $contactWidth; ?>;
 	var canvasHeight= <?php echo $canvasHeight; ?>;
-	var fontName= <?php echo $fontName; ?>;
-	var fontPosition= <?php echo $fontPosition; ?>;
-	var fontContact= <?php echo $fontContact; ?>;
+	var fontNameSize= canvasHeight*(<?php echo $fontNameSize;?> /250);
+	var fontPositionSize= canvasHeight*(<?php echo $fontPositionSize; ?> /250);
+	var fontContactSize= canvasHeight*(<?php echo $fontContactSize; ?>/250);
         var image = <?php echo $image; ?>;
 	var height=0;
 	if (canvas.getContext)
@@ -170,12 +206,12 @@ window.onload = function() {
 		cxt.fillStyle="#FFFFFF";
 		cxt.fillRect(0,0,canvas.width,canvas.height);
 		var fillName = canvas.getContext("2d");
-		fillName.font = fontName.toString()+"px Arial";
+		fillName.font = fontNameSize.toString()+"px Arial";
 		fillName.fillStyle = "black";
 		fillName.textAlign = "left";
 		fillName.fillText(name, nameWidth, nameHeight);
 		var fillPosition = canvas.getContext("2d");
-		fillPosition.font = fontPosition.toString()+"px Arial";
+		fillPosition.font = fontPositionSize.toString()+"px Arial";
 		fillPosition.fillStyle = "black";
 		fillPosition.textAlign = "left";
 		fillPosition.fillText(position, positionWidth, positionHeight);
@@ -183,7 +219,7 @@ window.onload = function() {
 		var drawPhone = canvas.getContext("2d");
 		drawPhone.drawImage(phoneimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250),canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillPhone = canvas.getContext("2d");
-		fillPhone.font = fontContact.toString()+"px Arial";
+		fillPhone.font = fontContactSize.toString()+"px Arial";
 		fillPhone.fillStyle = "black";
 		fillPhone.textAlign = "left";
 		fillPhone.fillText(phone, contactWidth, contactHeight);
@@ -193,7 +229,7 @@ window.onload = function() {
 		var drawEmail = canvas.getContext("2d");
 		drawEmail.drawImage(emailimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillEmail = canvas.getContext("2d");
-		fillEmail.font = fontContact.toString()+"px Arial";
+		fillEmail.font = fontContactSize.toString()+"px Arial";
 		fillEmail.fillStyle = "black";
 		fillEmail.textAlign = "left";
 		fillEmail.fillText(email, contactWidth, contactHeight+height);
@@ -203,7 +239,7 @@ window.onload = function() {
 		var drawWeb = canvas.getContext("2d");
 		drawWeb.drawImage(webimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillWeb = canvas.getContext("2d");
-		fillWeb.font = fontContact.toString()+"px Arial";
+		fillWeb.font = fontContactSize.toString()+"px Arial";
 		fillWeb.fillStyle = "black";
 		fillWeb.textAlign = "left";
 		fillWeb.fillText(web, contactWidth, contactHeight+height);
@@ -213,7 +249,7 @@ window.onload = function() {
 		var drawFacebook = canvas.getContext("2d");
 		drawFacebook.drawImage(fbimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillFacebook = canvas.getContext("2d");
-		fillFacebook.font = fontContact.toString()+"px Arial";
+		fillFacebook.font = fontContactSize.toString()+"px Arial";
 		fillFacebook.fillStyle = "black";
 		fillFacebook.textAlign = "left";
 		fillFacebook.fillText(facebook, contactWidth, contactHeight+height);
@@ -276,10 +312,12 @@ window.onload = function() {
 		<caption>Business Card</caption>
 		<tr>
 			<td>Name:</td>
-			<td><input type="text" id="name" name="name" value="<?php echo $name;?>">
-				 <input type="hidden" name="nameWidth" value="<?php echo $nameWidth;?>">
-				 <input type="hidden" name="nameHeight" value="<?php echo $nameHeight;?>">
-				<button name="nameHeight" type="submit" value=<?php echo ($nameHeight-5);?>>/\</button>
+			<td>
+                                <input type="text" id="name" name="name" value="<?php echo $name;?>" style="width:100px">
+                                <input type="number" id="fontNameSize" name="fontNameSize" value="<?php echo round($fontNameSize);?>" min="1" max="99" style="width:30px">
+				<input type="hidden" name="nameWidth" value="<?php echo $nameWidth;?>">
+				<input type="hidden" name="nameHeight" value="<?php echo $nameHeight;?>">
+                                <button name="nameHeight" type="submit" value=<?php echo ($nameHeight-5);?>>/\</button>
 				<button name="nameHeight" type="submit" value=<?php echo ($nameHeight+5);?>>\/</button>
 				<button name="nameWidth" type="submit" value=<?php echo ($nameWidth-5) ;?>> &lt </button>
 				<button name="nameWidth" type="submit" value=<?php echo ($nameWidth+5) ;?>> &gt </button>
@@ -290,9 +328,10 @@ window.onload = function() {
 		<tr>
 			<td>Position:</td>
 			<td>
-				<input type="text" id="position" name="position" value="<?php echo $position;?>">
-				 <input type="hidden" name="positionWidth" value="<?php echo $positionWidth;?>">
-				 <input type="hidden" name="positionHeight" value="<?php echo $positionHeight;?>">
+				<input type="text" id="position" name="position" value="<?php echo $position;?>" style="width:100px">
+                                <input type="number" id="fontPositionSize" name="fontPositionSize" value="<?php echo round($fontPositionSize);?>" min="1" max="99" style="width:30px">
+				<input type="hidden" name="positionWidth" value="<?php echo $positionWidth;?>">
+				<input type="hidden" name="positionHeight" value="<?php echo $positionHeight;?>">
 				<button name="positionHeight" type="submit" value=<?php echo ($positionHeight-5);?>>/\</button>
 				<button name="positionHeight" type="submit" value=<?php echo ($positionHeight+5);?>>\/</button>
 				<button name="positionWidth" type="submit" value=<?php echo ($positionWidth-5) ;?>> &lt </button>
@@ -304,7 +343,8 @@ window.onload = function() {
 		<tr>
 			<td>Phone:</td>
 			<td>
-				<input type="text" id="phone" name="phone" value="<?php echo $phone;?>">
+				<input type="text" id="phone" name="phone" value="<?php echo $phone;?>" style="width:100px">
+                                <input type="number" id="fontContactSize" name="fontContactSize" value="<?php echo round($fontContactSize);?>" min="1" max="99" style="width:30px">
 				 <input type="hidden" name="contactWidth" value="<?php echo $contactWidth;?>">
 				 <input type="hidden" name="contactHeight" value="<?php echo $contactHeight;?>">
 				<button name="contactHeight" type="submit" value=<?php echo ($contactHeight-5);?>>/\</button>
@@ -318,28 +358,29 @@ window.onload = function() {
 		<tr>
 			<td>E-mail:</td>
 			<td>
-				<input type="text" id="email" name="email" value="<?php echo $email;?>">
+				<input type="text" id="email" name="email" value="<?php echo $email;?>" style="width:100px">
 				<span class="error"> <?php echo $emailErr;?></span>
 			</td>
 		</tr>
 		<tr>
 			<td>Web:</td>
 			<td>
-				<input type="text" id="web" name="web" value="<?php echo $web;?>">
+				<input type="text" id="web" name="web" value="<?php echo $web;?>" style="width:100px">
 				<span class="error"> <?php echo $webErr;?></span>
 			</td>
 		</tr>
 		<tr>
 			<td>Facebook:</td>
 			<td>
-				<input type="text" id="facebook" name="facebook" value="<?php echo $facebook;?>">
+				<input type="text" id="facebook" name="facebook" value="<?php echo $facebook;?>" style="width:100px">
 				<span class="error"> <?php echo $facebookErr;?></span>
 			</td>
                 </tr>
                 <tr>
                     <td><label for="image">Choose image:</label></td>
                     <td>
-                        <select id="image" name="image">
+                        <select id="image" name="image"  style="width:105px">
+                            <option value="" <?php if ($image==""){echo "selected";};?>></option>
                             <option value="1" <?php if ($image==1){echo "selected";};?>>Version 1</option>
                             <option value="2" <?php if ($image==2){echo "selected";};?>>Version 2</option>
                             <option value="3" <?php if ($image==3){echo "selected";};?>>Version 3</option>
