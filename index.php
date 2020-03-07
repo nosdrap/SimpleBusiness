@@ -216,7 +216,7 @@ window.onload = function() {
 		fillName.textAlign = "left";
 		fillName.fillText(name, nameWidth, nameHeight);
 		var fillPosition = canvas.getContext("2d");
-		fillPosition.font = fontPositionSize.toString()+"px Arial";
+		fillPosition.font = fontPositionSize.toString()+"px " + fontStyle;
 		fillPosition.fillStyle = "black";
 		fillPosition.textAlign = "left";
 		fillPosition.fillText(position, positionWidth, positionHeight);
@@ -224,7 +224,7 @@ window.onload = function() {
 		var drawPhone = canvas.getContext("2d");
 		drawPhone.drawImage(phoneimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250),canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillPhone = canvas.getContext("2d");
-		fillPhone.font = fontContactSize.toString()+"px Arial";
+		fillPhone.font = fontContactSize.toString()+"px " + fontStyle;
 		fillPhone.fillStyle = "black";
 		fillPhone.textAlign = "left";
 		fillPhone.fillText(phone, contactWidth, contactHeight);
@@ -234,7 +234,7 @@ window.onload = function() {
 		var drawEmail = canvas.getContext("2d");
 		drawEmail.drawImage(emailimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillEmail = canvas.getContext("2d");
-		fillEmail.font = fontContactSize.toString()+"px Arial";
+		fillEmail.font = fontContactSize.toString()+"px " + fontStyle;
 		fillEmail.fillStyle = "black";
 		fillEmail.textAlign = "left";
 		fillEmail.fillText(email, contactWidth, contactHeight+height);
@@ -244,7 +244,7 @@ window.onload = function() {
 		var drawWeb = canvas.getContext("2d");
 		drawWeb.drawImage(webimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillWeb = canvas.getContext("2d");
-		fillWeb.font = fontContactSize.toString()+"px Arial";
+		fillWeb.font = fontContactSize.toString()+"px " + fontStyle;
 		fillWeb.fillStyle = "black";
 		fillWeb.textAlign = "left";
 		fillWeb.fillText(web, contactWidth, contactHeight+height);
@@ -254,7 +254,7 @@ window.onload = function() {
 		var drawFacebook = canvas.getContext("2d");
 		drawFacebook.drawImage(fbimg, contactWidth-canvasHeight*(20/250), contactHeight-canvasHeight*(13/250)+height,canvasHeight*(15/250),canvasHeight*(15/250));
 		var fillFacebook = canvas.getContext("2d");
-		fillFacebook.font = fontContactSize.toString()+"px Arial";
+		fillFacebook.font = fontContactSize.toString()+"px " + fontStyle;
 		fillFacebook.fillStyle = "black";
 		fillFacebook.textAlign = "left";
 		fillFacebook.fillText(facebook, contactWidth, contactHeight+height);
