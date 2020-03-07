@@ -15,6 +15,7 @@ table {
     //Test
 	$name = $email = $nameErr = $emailErr = $phone = $phoneErr = $position = $positionErr = $web = $webErr = $facebook = $facebookErr = "";
         $image= "0";
+        $fontStyle="Arial";
         $fontNameSize=20;
         $fontPositionSize=20;
         $fontContactSize=17;
@@ -80,6 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if (!empty($_POST["image"])) {
     $image = test_input($_POST["image"]);
+  }
+  if (!empty($_POST["fontStyle"])) {
+    $fontStyle = test_input($_POST["fontStyle"]);
   }
   if (!empty($_POST["resetName"])) {
     unset($_POST['nameWidth']);
@@ -157,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["fontContactSize"] = $fontContactSize;
 	}
 }
-//echo $image;
+//echo $fontStyle;
     //$fontName=$canvasHeight*($fontNameSize/250);
     //$fontPosition=$canvasHeight*(20/250);
     //$fontContact=$canvasHeight*(17/250);
@@ -197,6 +201,7 @@ window.onload = function() {
 	var fontPositionSize= canvasHeight*(<?php echo $fontPositionSize; ?> /250);
 	var fontContactSize= canvasHeight*(<?php echo $fontContactSize; ?>/250);
         var image = <?php echo $image; ?>;
+        var fontStyle ="<?php echo $fontStyle; ?>";
 	var height=0;
 	if (canvas.getContext)
 	{
@@ -206,7 +211,7 @@ window.onload = function() {
 		cxt.fillStyle="#FFFFFF";
 		cxt.fillRect(0,0,canvas.width,canvas.height);
 		var fillName = canvas.getContext("2d");
-		fillName.font = fontNameSize.toString()+"px Arial";
+		fillName.font = fontNameSize.toString()+"px " + fontStyle;
 		fillName.fillStyle = "black";
 		fillName.textAlign = "left";
 		fillName.fillText(name, nameWidth, nameHeight);
@@ -360,6 +365,22 @@ window.onload = function() {
 			<td>
 				<input type="text" id="email" name="email" value="<?php echo $email;?>" style="width:100px">
 				<span class="error"> <?php echo $emailErr;?></span>
+                                <select id="fontStyle" name="fontStyle">
+                                <option value="Arial" <?php if ($fontStyle=="Arial"){echo "selected";};?>>Arial</option>
+                                <option value="Helvetica" <?php if ($fontStyle=="Helvetica"){echo "selected";};?>>Helvetica</option>
+                                <option value="Baskerville" <?php if ($fontStyle=="Baskerville"){echo "selected";};?>>Baskerville</option>
+                                <option value="Courier" <?php if ($fontStyle=="Courier"){echo "selected";};?>>Courier</option>
+                                <option value="TimesNewRoman" <?php if ($fontStyle=="TimesNewRoman"){echo "selected";};?>>Times New Roman</option>
+                                <option value="Times" <?php if ($fontStyle=="Times"){echo "selected";};?>>Times</option>
+                                <option value="Courier New" <?php if ($fontStyle=="Courier New"){echo "selected";};?>>Courier New</option>
+                                <option value="Arial Narrow" <?php if ($fontStyle=="Arial Narrow"){echo "selected";};?>>Arial Narrow</option>
+                                <option value="Candara" <?php if ($fontStyle=="Candara"){echo "selected";};?>>Candara</option>
+                                <option value="Geneva" <?php if ($fontStyle=="Geneva"){echo "selected";};?>>Geneva</option>
+                                <option value="Calibri" <?php if ($fontStyle=="Calibri"){echo "selected";};?>>Calibri</option>
+                                <option value="Optima" <?php if ($fontStyle=="Optima"){echo "selected";};?>>Optima</option>
+                                <option value="Cambria" <?php if ($fontStyle=="Cambria"){echo "selected";};?>>Cambria</option>
+                                <option value="Monaco" <?php if ($fontStyle=="Monaco"){echo "selected";};?>>Monaco</option>
+                        </select>
 			</td>
 		</tr>
 		<tr>
