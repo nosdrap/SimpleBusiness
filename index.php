@@ -292,6 +292,13 @@ window.onload = function() {
 			</td>
                 </tr>
 		<tr>
+			<td>Adress:</td>
+			<td>
+				<input type="text" id="facebook" name="facebook" value="<?php echo $facebook;?>">
+				<span class="error"> <?php echo $facebookErr;?></span>
+			</td>
+                </tr>
+		<tr>
 			<td colspan="2" style="text-align:center"><input type="submit" value="Apply">
 			</td>
 		</tr>
